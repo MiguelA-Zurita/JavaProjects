@@ -8,17 +8,25 @@
 
 package es.cide.dam.programacio.yaaz;
 
+import java.util.Random;
+
 public class ciutat { // Clase ciutat
 
     private String nom;
     private int tamany;
     private zombie ruta[];
+    private Random randomizer;
 
-    public ciutat(String nom, int tamany) { // Constructor de la clase ciutat
+    public ciutat(String nom, int tamany) { // Constructor de la clase ciutat   
+        this.randomizer = new Random(); // Creación de un objeto Random
         this.nom = nom; // Asignación del nombre de la ciudad
         this.tamany = tamany; // Asignación del tamaño de la ciudad
         this.ruta = new zombie[this.tamany]; // Creación de un array de zombies con el tamaño de la ciudad
         for (int i = 0; i < this.tamany; i++) { // Bucle que crea un zombie en cada posición de la ruta
+            if(randomizer.nextInt(1,100) <= 10){
+                this.ruta[i] = new superZombie(); // Creación de un zombie
+                System.out.println("Super zombie creado");
+            }
             this.ruta[i] = new zombie(); // Creación de un zombie
             System.out.println("Zombie " + i + " creado");
         }

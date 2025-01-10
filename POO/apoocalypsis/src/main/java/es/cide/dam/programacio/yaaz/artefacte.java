@@ -1,6 +1,6 @@
 package es.cide.dam.programacio.yaaz;
 
-public class artefacte{
+public abstract class artefacte{
 
     private double pes;
     private double valorArtefacte;
@@ -24,6 +24,10 @@ public class artefacte{
 
     public void setValorArtefacte(double nuevoValor){
         this.valorArtefacte = nuevoValor;
+    }
+
+    public void utilitzarArtefacte(supervivent s){
+    System.out.println("Utilitzant artefacte");
     }
 
 }

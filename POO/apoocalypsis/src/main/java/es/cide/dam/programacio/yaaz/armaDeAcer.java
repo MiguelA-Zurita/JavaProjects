@@ -7,5 +7,12 @@ public class armaDeAcer extends artefacte{
     public armaDeAcer(){
         randomizer = new Random();
         super.setValorArtefacte(randomizer.nextDouble(1, 1.5));
-    }    
+    }
+
+    @Override
+    public void utilitzarArtefacte(supervivent s){
+        System.out.println("Utilitzant arma de acer");
+        int valor = (int)super.getValorArtefacte();
+        s.setAtaque(s.getAtaque()+ valor);
+    }
 }

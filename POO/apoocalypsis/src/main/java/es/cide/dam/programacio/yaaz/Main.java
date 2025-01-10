@@ -27,7 +27,7 @@ public class Main { // Clase Main
         supervivent sup = new supervivent(nomDelSupervivent); // Creamos un objeto de la clase superviviente con el nombre introducido por el usuario
         novaCiutat albacete = new novaCiutat(nomDeLaCiutat, tamanyDeLaCiutat); // Creamos un objeto de la clase ciudad con el nombre y tamaño introducidos por el usuario
         for (int i = 0; i < albacete.getTamany(); i++) { // Bucle para recorrer la ruta de la ciudad
-            zombie zombieRandom = albacete.posicioRuta(i); // Asignamos el zombie de nuestra posición actual en la ruta, al zombie con el que combatiremos
+                zombie zombieRandom = albacete.posicioRuta(i); // Asignamos el zombie de nuestra posición actual en la ruta, al zombie con el que combatiremos
             System.out.println("\n");
             System.out.println("Hay un zombie en la posición " + i + " de la ruta de " + nomDeLaCiutat + " con " + zombieRandom.getSalut() + " de salud"); 
             Main.lluita(sup, zombieRandom, albacete, turno); // Llamamos al método de combate entre el superviviente y el zombie
@@ -35,7 +35,7 @@ public class Main { // Clase Main
                 i = albacete.getTamany(); // Si la salud del superviviente es menor o igual a 0, salimos del bucle
             }
             turno = 1; // Reiniciamos el turno a 1
-            Main.agafaArtefacte(albacete, i);
+            Main.agafaArtefacte(albacete, i, sup);
         }
         if(sup.getSalut() > 0){
             System.out.println("\n");
@@ -83,12 +83,15 @@ public class Main { // Clase Main
         }
     }
 
-    public static void agafaArtefacte(novaCiutat albacete, int posicio) { // Método para que el superviviente coja el artefacto de su posición y consumirlo
+    public static void agafaArtefacte(novaCiutat albacete, int posicio, supervivent s) { // Método para que el superviviente coja el artefacto de su posición y consumirlo
+        
         if(albacete.posicioArtefacte(posicio) == null){
             System.out.println("No hay artefacto en esta posición");
         }
         else {
             System.out.println("Has encontrado un artefacto");
+            artefacte artefactoEncontrado = albacete.posicioArtefacte(posicio);
+            artefactoEncontrado.utilitzarArtefacte(s);
         }
     
     }
