@@ -6,13 +6,12 @@ public class escud extends artefacte{
     private Random randomizer;
     public escud(){
         randomizer = new Random();
-        super.setValorArtefacte(randomizer.nextDouble(0.9,1.5));
+        super.setValorArtefacte(randomizer.nextDouble(0.9,1.6));
     }
 
     @Override
     public void utilitzarArtefacte(supervivent s){
         System.out.println("Utilitzant arma de acer");
-        int valorDefensaTotal = (int)(super.getValorArtefacte()*s.getDefensa());
-        s.setAtaque(valorDefensaTotal);
+        s.setDefensa(((int)(super.getValorArtefacte()*s.getDefensa())));
     }
 }

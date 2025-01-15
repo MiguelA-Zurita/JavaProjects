@@ -6,13 +6,12 @@ public class farmaciola extends artefacte{
     private Random randomizer;
     public farmaciola(){
         randomizer = new Random();
-        super.setValorArtefacte(randomizer.nextInt(1,15));
+        super.setValorArtefacte(randomizer.nextInt(1,16));
     }
     
     @Override
     public void utilitzarArtefacte(supervivent s){
         System.out.println("Utilitzant farmaciola");
-        int valor = (int) super.getValorArtefacte();
-        s.setSalut(s.getSalut()+ valor);
+        s.setSalut(s.getSalut()+(int)super.getValorArtefacte());
     }
 }
