@@ -13,7 +13,6 @@ public class Main { // Clase Main
         String nomDelSupervivent = "a"; // Declaramos la variable para guardar el nombre del superviviente
         String nomDeLaCiutat = "a"; // Declaramos la variable para guardar el nombre de la ciudad
         int tamanyDeLaCiutat = 0; // Declaramos la variable para guardar el tamaño de la ciudad
-        int turno = 1; // Declaramos la variable para guardar el turno
         Random rand = new Random(); // Creamos un objeto de la clase Random
         Scanner sc = new Scanner(System.in); // Creamos un objeto de la clase Scanner
         System.out.println("Bienvenido a tu aventura post-apocalíptica");
@@ -30,11 +29,11 @@ public class Main { // Clase Main
             zombie zombieRandom = albacete.posicioRuta(i); // Asignamos el zombie de nuestra posición actual en la ruta, al zombie con el que combatiremos
             System.out.println("\n");
             System.out.println("Hay un zombie en la posición " + i + " de la ruta de " + nomDeLaCiutat + " con " + zombieRandom.getSalut() + " de salud"); 
-            Main.lluita(sup, zombieRandom, albacete, turno); // Llamamos al método de combate entre el superviviente y el zombie
+            Main.lluita(sup, zombieRandom, albacete); // Llamamos al método de combate entre el superviviente y el zombie
             if (sup.getSalut() <=0){
                 i = albacete.getTamany(); // Si la salud del superviviente es menor o igual a 0, salimos del bucle
             }
-            turno = 1; // Reiniciamos el turno a 1
+            
             Main.agafaArtefacte(albacete, i, sup);
         }
         if(sup.getSalut() > 0){
@@ -45,7 +44,8 @@ public class Main { // Clase Main
         sc.close(); // Cerramos el objeto de la clase Scanner
     }
 
-    public static void lluita(supervivent sup, zombie zombieRandom, ciutat albacete, int turno) { // Método para el combate entre el superviviente y el zombie
+    public static void lluita(supervivent sup, zombie zombieRandom, ciutat albacete) { // Método para el combate entre el superviviente y el zombie
+        int turno = 1; // Reiniciamos el turno a 1
         int ataque = 0; // Declaramos la variable para guardar el ataque
         int defensa = 0; // Declaramos la variable para guardar la defensa
         while (sup.getSalut() > 0 && zombieRandom.getSalut() > 0) { //Bucle para el combate entre el superviviente y el zombie
