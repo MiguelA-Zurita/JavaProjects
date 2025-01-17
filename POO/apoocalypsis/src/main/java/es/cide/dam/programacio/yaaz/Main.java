@@ -1,6 +1,7 @@
 /*
  * Nom: Miguel Angel Zurita Redwood
- * Data: 28/11/2024
+ * Data: 17/01/2025
+ * 
  */
 
 package es.cide.dam.programacio.yaaz;
@@ -36,7 +37,7 @@ public class Main { // Clase Main
             
             Main.agafaArtefacte(albacete, i, sup);
         }
-        if(sup.getSalut() > 0){
+        if(sup.getSalut() > 0){ // Si la salud del superviviente es mayor que 0 mostramos un mensaje de victoria
             System.out.println("\n");
             System.out.println("La ciudad ha sido limpiada de zombies");
             System.out.println("Has llegado al refugio de supervivientes");
@@ -85,14 +86,13 @@ public class Main { // Clase Main
 
     public static void agafaArtefacte(novaCiutat albacete, int posicio, supervivent s) { // Método para que el superviviente coja el artefacto de su posición y consumirlo
         
-        if(albacete.posicioArtefacte(posicio) == null){
+        if(albacete.posicioArtefacte(posicio) == null){ // Si no hay artefacto en la posición, mostramos un mensaje
             System.out.println("No hay artefacto en esta posición");
         }
-        else{
+        else{ // Si hay artefacto en la posición, mostramos un mensaje y consumimos el artefacto
             System.out.println("Has encontrado un artefacto");
-            artefacte artefactoEncontrado = albacete.posicioArtefacte(posicio);
-            artefactoEncontrado.utilitzarArtefacte(s);
+            artefacte artefactoEncontrado = albacete.posicioArtefacte(posicio); // Asignamos el artefacto de nuestra posición actual en la ruta, al artefacto encontrado
+            artefactoEncontrado.utilitzarArtefacte(s); // Utilizamos el artefacto
         }
-    
     }
 }

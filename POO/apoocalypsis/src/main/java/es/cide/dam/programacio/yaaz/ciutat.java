@@ -1,6 +1,6 @@
 /*
  * Nom: Miguel Angel Zurita Redwood
- * Data: 28/11/2024
+ * Data: 17/01/2025
  * 
  */
 
@@ -22,7 +22,7 @@ public class ciutat { // Clase ciutat
         this.ruta = new zombie[this.tamany]; // Creación de un array de zombies con el tamaño de la ciudad
         for (int i = 0; i < this.tamany; i++) { // Bucle que crea un zombie en cada posición de la ruta
             if (randomizer.nextInt(1, 11) <= 1) {
-                this.ruta[i] = new superZombie(); // Creación de un zombie
+                this.ruta[i] = new superZombie(); // Creación de un super zombie
                 System.out.println("Super zombie creado");
             }
             this.ruta[i] = new zombie(); // Creación de un zombie
