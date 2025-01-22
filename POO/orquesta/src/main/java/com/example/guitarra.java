@@ -5,8 +5,8 @@ public class guitarra extends instrument implements interficieCordes { //Subclas
     public guitarra(){ // Constructor sin parametros
         super();
     }
-    public guitarra(String nom, String tipus){ //Constructor con parametros
-        super(nom, tipus);
+    public guitarra(String nom){ //Constructor con parametros
+        super(nom, "Cordes");
     }
 
     @Override

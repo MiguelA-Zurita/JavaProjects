@@ -5,8 +5,8 @@ public class tambor extends instrument implements interficiePercussio{ //Subclas
         super();
     }
 
-    public tambor(String nom, String tipus){ //Constructor con parametros
-        super(nom, tipus);
+    public tambor(String nom){ //Constructor con parametros
+        super(nom, "Percussió");
     }
 
     @Override

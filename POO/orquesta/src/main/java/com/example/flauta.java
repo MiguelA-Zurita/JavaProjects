@@ -5,8 +5,8 @@ public class flauta extends instrument implements interficieVent{ //Subclase fla
         super();
     }
 
-    public flauta(String nom, String tipus){ //Constructor con parametros
-        super(nom, tipus);
+    public flauta(String nom){ //Constructor con parametros
+        super(nom, "Vent");
     }
 
     @Override

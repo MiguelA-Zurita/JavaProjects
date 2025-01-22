@@ -2,9 +2,9 @@ package com.example;
 
 public class Main {
     public static void main(String[] args) {
-        guitarra fender = new guitarra("Fender Stratocaster", "cordes"); //Instancio un objeto de clase guitarra
-        tambor tamborGigante = new tambor("Tambor Yamaha", "percussió"); //Instancio un objeto de clase tambor
-        flauta flautin = new flauta("Flauta Yamaha", "vent"); //Instancio un objeto de clase flauta
+        guitarra fender = new guitarra("Fender Stratocaster"); //Instancio un objeto de clase guitarra
+        tambor tamborGigante = new tambor("Tambor Yamaha"); //Instancio un objeto de clase tambor
+        flauta flautin = new flauta("Flauta Yamaha"); //Instancio un objeto de clase flauta
         fender.mostrarInformacio(); //Muestro la información de la guitarra, heredado de la superclase instrumento
         fender.afinarCordes(); //Afino las cuerdas con el metodo afinarCordes, implementado de la interificie de cuerda
         fender.tocarArpegis(); //Toco Arpegis con el metodo tocarArpegis, implementado de la interificie de cuerda
