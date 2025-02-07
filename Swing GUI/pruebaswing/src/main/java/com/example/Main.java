@@ -65,6 +65,11 @@ public class Main {
                 showDialog(frame);
             }
         });
+        try{
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalFileChooserUI");
+        } catch(Exception e){
+            e.printStackTrace();
+        }
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
 

@@ -75,21 +75,28 @@ public class Main {
         ActionListener gestorEventoDividir = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent a){
-                if(segundoNumero.getText().equals("0") || Double.parseDouble(segundoNumero.getText()) == 0.0d){
-                    errorDialogo(null, "No se puede dividir por cero, prueba con otro número!");
-                } else{
+                try {
+                    segundoNumero.getText();
+                    if(segundoNumero.getText().equals("0") || Double.parseDouble(segundoNumero.getText()) == 0.0d){
+                        errorDialogo(null, "No se puede dividir por cero, prueba con otro número!");
+                    }
+                    else{
                         try{
                             Double resultado = Double.parseDouble(primerNumero.getText()) / Double.parseDouble(segundoNumero.getText());
                             resultadoLabel.setText(String.valueOf(resultado));
                         }catch(Exception numberFormatException){
                             errorDialogo(null, "Ha habido un error! Asegurate de introducir un número válido (:");
                         }
-                }  
+                    }  
+                } catch(Exception numberFormatException){
+                    errorDialogo(null, "Al dividir el segundo valor no puede ser nulo! Prueba a introducir un número");
+                }
+                
             }
         };
         return gestorEventoDividir;
     }
-    
+
     public static void main(String[] args) {
         //main Frame para la calculadora
         JFrame mainFrame = new JFrame("Calculator");
@@ -147,32 +154,33 @@ public class Main {
         gridConstraints.gridx = 0;
         gridConstraints.gridy = 3;
         //Añadiendo el listener para sumar
-        sumaButton.addActionListener(sumar(primerNumeroTextField, segundoNumeroTextField, resultadoLabel));
+        sumaButton.addActionListener(sumar(primerNumeroTextField, segundoNumeroTextField, resultadoLabel)); //Añadimos el listener para sumar
         principalPanel.add(sumaButton,gridConstraints);
         //Creando el botón de resta
         JButton restaButton = new JButton("-");
         //Modificando los constraints para que quede al lado del botón de suma
         gridConstraints.gridx = 1;
-        restaButton.addActionListener(restar(primerNumeroTextField, segundoNumeroTextField, resultadoLabel));
+        restaButton.addActionListener(restar(primerNumeroTextField, segundoNumeroTextField, resultadoLabel)); //Añadimos el listener para restar
         principalPanel.add(restaButton,gridConstraints);
         //Creando el botón de multiplicar
         JButton multiplicaButton = new JButton("×");
         //Modificando constraints para que quede bajo el botón de suma
         gridConstraints.gridx = 0;
         gridConstraints.gridy = 4;
-        multiplicaButton.addActionListener(multiplicar(primerNumeroTextField, segundoNumeroTextField, resultadoLabel));
+        multiplicaButton.addActionListener(multiplicar(primerNumeroTextField, segundoNumeroTextField, resultadoLabel)); //Añadimos el listener para multiplicar
         principalPanel.add(multiplicaButton,gridConstraints);
         //Creando el botón de dividir
         JButton divideButton = new JButton("÷");
         //Modificando constraints para que quede al lado del boton de multiplicar
         gridConstraints.gridx = 1;
-        divideButton.addActionListener(dividir(primerNumeroTextField, segundoNumeroTextField, resultadoLabel));
+        divideButton.addActionListener(dividir(primerNumeroTextField, segundoNumeroTextField, resultadoLabel)); //Añadimos el listener para dividir
         principalPanel.add(divideButton,gridConstraints);
         //Añadiendo un Look & Feel para una mejor experiencia visual
         try{
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
         } catch(Exception e){
             e.printStackTrace();
+            errorDialogo(mainFrame, "No se ha podido cargar el LookAndFeel");
         }
         //Añadiendo el panel principal al Frame
         mainFrame.add(principalPanel);
