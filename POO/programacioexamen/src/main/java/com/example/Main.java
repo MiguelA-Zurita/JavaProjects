@@ -7,7 +7,7 @@ package com.example;
 
 public class Main { //Clase Main
     public static void main(String[] args) { //Metode main per executar tot el codi
-        torrada torradaSantSebastia = new torrada("Sant Sebastià", "2025"); //Inicialitzam l'objecte torrada
+        //torrada torradaSantSebastia = new torrada("Sant Sebastià", "2025"); //Inicialitzam l'objecte torrada
         botifarro botifarroSantSebastia = new botifarro(); // Inicialitzam l'objecte botifarro
         sobrassada sobrassadaSantSebastia = new sobrassada(); // Inicialitzam l'objecte sobrassada
         botifarroSantSebastia.posarCarnAGraella(); //Executam el metode posarCarnAGraella
