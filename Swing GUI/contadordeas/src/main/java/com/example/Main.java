@@ -5,6 +5,7 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.WindowConstants;
 
@@ -12,6 +13,8 @@ public class Main {
     public static void main(String[] args) {
         JFrame mainFrame = new JFrame("Contador de A's");
         mainFrame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        JPanel primerPanel = new JPanel();
+        mainFrame.add(primerPanel);
         JTextField campoTexto = new JTextField();
         campoTexto.addKeyListener(new KeyListener() {
             private int As;
@@ -45,6 +48,11 @@ public class Main {
             }
         });
         JLabel primerLabel = new JLabel("Aquí te mostrare el número de A's:");
+        primerPanel.add(primerLabel);
+
+        mainFrame.add(primerLabel);
+        mainFrame.pack();
+        mainFrame.setVisible(true);
 
     }
 }

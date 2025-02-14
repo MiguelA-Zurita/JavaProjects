@@ -8,7 +8,7 @@ public class Main {
     private static void errorDialogo(JFrame padre, String textoError){
     //Creando el dialogo de error
     JDialog dialog = new JDialog(padre, "Mensaje importante", true);
-    dialog.setSize(350,150);
+    dialog.setSize(400,150);
     dialog.setLayout(new BorderLayout());
 
     //Añadiendo un mensaje
