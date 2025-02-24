@@ -9,10 +9,12 @@ import java.util.Random;
 
 public class armaDeFoc extends artefacte {
     private Random randomizer; //objeto para generar numeros aleatorios
+    private double VALOR_MAXIMO = 1.6; //valor maximo del artefacto
+    private double VALOR_MINIMO = 0.9; //valor minimo del artefacto
 
     public armaDeFoc() { // Constructor de la clase arma de fuego
         randomizer = new Random(); // Inicializamos el objeto randomizer
-        setValorArtefacte(randomizer.nextDouble(0.9, 1.6)); // Asignamos un valor aleatorio entre 0.9 y 1.5 (el valor máximo es excluído) al atributo valorArtefacte
+        setValorArtefacte(randomizer.nextDouble(VALOR_MINIMO, VALOR_MAXIMO)); // Asignamos un valor aleatorio entre 0.9 y 1.5 (el valor máximo es excluído) al atributo valorArtefacte
     }
 
     @Override

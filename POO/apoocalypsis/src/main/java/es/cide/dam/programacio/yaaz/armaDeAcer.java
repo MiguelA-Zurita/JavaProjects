@@ -9,10 +9,12 @@ import java.util.Random;
 
 public class armaDeAcer extends artefacte {
     private Random randomizer; // Instanciamos el objeto randomizer para generar números aleatorios
+    private int VALOR_MAXIMO = 16; // Declaramos una constante para el valor máximo del artefacto
+    private int VALOR_MINIMO = 1; // Declaramos una constante para el valor mínimo del artefacto
 
     public armaDeAcer() { // Constructor del arma de acero
         randomizer = new Random(); // Inicializamos el objeto randomizer
-        setValorArtefacte(randomizer.nextInt(1, 16)); // Asignamos un valor aleatorio entre 1 y 15 (el valor máximo es excluído) al atributo valorArtefacte
+        setValorArtefacte(randomizer.nextInt(VALOR_MINIMO, VALOR_MAXIMO)); // Asignamos un valor aleatorio entre 1 y 15 (el valor máximo es excluído) al atributo valorArtefacte
     }
 
     @Override

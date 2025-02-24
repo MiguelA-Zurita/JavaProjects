@@ -9,10 +9,12 @@ import java.util.Random;
 
 public class escud extends artefacte {
     private Random randomizer; // Instanciamos el objeto randomizer para generar números aleatorios
+    private double VALOR_MAXIMO = 1.6; // Declaramos una constante para el valor máximo del artefacto
+    private double VALOR_MINIMO = 0.9; // Declaramos una constante para el valor mínimo del artefacto
 
     public escud() {
         randomizer = new Random(); // Inicializamos el objeto randomizer
-        setValorArtefacte(randomizer.nextDouble(0.9, 1.6)); // Asignamos un valor aleatorio entre 0.9 y 1.5 (el valor máximo es excluído) al atributo valorArtefacte
+        setValorArtefacte(randomizer.nextDouble(VALOR_MINIMO, VALOR_MAXIMO)); // Asignamos un valor aleatorio entre 0.9 y 1.5 (el valor máximo es excluído) al atributo valorArtefacte
     }
 
     @Override
