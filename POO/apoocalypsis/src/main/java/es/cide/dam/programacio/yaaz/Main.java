@@ -23,7 +23,7 @@ public class Main { // Clase Main
         System.out.println("Creando ciudad...");
         System.out.println("Introduce el nombre de la ciudad:");
         nomDeLaCiutat = sc.nextLine(); // Pedimos al usuario que introduzca el nombre de la ciudad
-        tamanyDeLaCiutat = 2000000; // Generamos un número aleatorio entre 10 y 20 para el tamaño de la ciudad
+        tamanyDeLaCiutat = rand.nextInt(10,20); // Generamos un número aleatorio entre 10 y 20 para el tamaño de la ciudad
         supervivent sup = new supervivent(nomDelSupervivent); // Creamos un objeto de la clase superviviente con el nombre introducido por el usuario
         novaCiutat albacete = new novaCiutat(nomDeLaCiutat, tamanyDeLaCiutat); // Creamos un objeto de la clase ciudad con el nombre y tamaño introducidos por el usuario
         for (int i = 0; i < albacete.getTamany(); i++) { // Bucle para recorrer la ruta de la ciudad
