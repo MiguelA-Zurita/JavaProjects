@@ -18,6 +18,10 @@ public class pelotaRebotante extends JPanel implements ActionListener {
         timer.start();
     }
 
+    public boolean colisionaJugador(JPanel jugador){
+        return (x <= jugador.getX() + jugador.getWidth() && x >= jugador.getX() && y >= jugador.getY() && y <= jugador.getY() + jugador.getHeight())
+    }
+
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
@@ -33,6 +37,7 @@ public class pelotaRebotante extends JPanel implements ActionListener {
         if(y + 2 * RADIO >= getHeight() || y < 0){
             dy = -dy;
         }
+
         x += dx;
         y += dy;
         repaint();
