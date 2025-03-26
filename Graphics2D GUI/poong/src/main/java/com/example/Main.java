@@ -6,68 +6,91 @@ import java.awt.event.*;
 
 public class Main {
     public static KeyListener jugadorIzquierdoListener(JFrame framePadre, palaIzquierda izquierdo){
+        Timer timer = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (izquierdo.getSubiendo()) {
+                    izquierdo.subir(framePadre);
+                } else if (izquierdo.getBajando()) {
+                    izquierdo.bajar(framePadre);
+                }
+            }
+        });
+        timer.start();
+
         KeyListener listener = new KeyListener() {
             @Override
             public void keyPressed(KeyEvent e) {
                 int codigo = e.getKeyCode();
                 switch(codigo){
                     case (87): //Tecla W
-                    izquierdo.subir(framePadre);
+                    izquierdo.setSubiendo(true);
                     break;
                     case (83): //Tecla S
-                    izquierdo.bajar(framePadre);
+                    izquierdo.setBajando(true);
                     break;
                 }
             }
             @Override
             public void keyReleased(KeyEvent e) {
-            }
-            @Override
-            public void keyTyped(KeyEvent e) {
                 int codigo = e.getKeyCode();
                 switch(codigo){
                     case (87): //Tecla W
-                    izquierdo.subir(framePadre);
+                    izquierdo.setSubiendo(false);
                     break;
                     case (83): //Tecla S
-                    izquierdo.bajar(framePadre);
+                    izquierdo.setBajando(false);
                     break;
                 }
+            }
+            @Override
+            public void keyTyped(KeyEvent e) {
             }
         };
         return listener;
     }
     
     public static KeyListener jugadorDerechoListener(JFrame framePadre, palaDerecha derecho){
+        Timer timer = new Timer(10, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (derecho.getSubiendo()) {
+                    derecho.subir(framePadre);
+                } else if (derecho.getBajando()) {
+                    derecho.bajar(framePadre);
+                }
+            }
+        });
+        timer.start();
+
         KeyListener listener = new KeyListener() {
             @Override
             public void keyPressed(KeyEvent e) {
                 int codigo = e.getKeyCode();
                 switch(codigo){
                     case (38): //Flecha arriba
-                    derecho.subir(framePadre);
+                    derecho.setSubiendo(true);
                     break;
                     case (40): //Flecha abajo
-                    derecho.bajar(framePadre);
+                    derecho.setBajando(true);
                     break;
                 }
             }
             @Override
             public void keyReleased(KeyEvent e) {
-            }
-            @Override
-            public void keyTyped(KeyEvent e) {
                 int codigo = e.getKeyCode();
                 switch(codigo){
                     case (38): //Flecha arriba
-                    derecho.subir(framePadre);
+                    derecho.setSubiendo(false);
                     break;
                     case (40): //Flecha abajo
-                    derecho.bajar(framePadre);
+                    derecho.setBajando(false);
                     break;
                 }
             }
-            
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
         };
         return listener;
     }
@@ -76,16 +99,25 @@ public class Main {
         JFrame mainFrame = new JFrame("POOng!");
         mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         mainFrame.setSize(600, 400);
-        mainFrame.setLayout(null);
         palaIzquierda jugadorIzquierdo = new palaIzquierda();
         palaDerecha jugadorDerecho = new palaDerecha(); 
-        jugadorIzquierdo.addKeyListener(jugadorIzquierdoListener(mainFrame, jugadorIzquierdo));
-        jugadorDerecho.addKeyListener(jugadorDerechoListener(mainFrame, jugadorDerecho));
-        mainFrame.add(jugadorIzquierdo);
-        mainFrame.add(jugadorDerecho);
-        jugadorIzquierdo.setBounds(20, (mainFrame.getHeight()/2)-70,10,70);
-        jugadorDerecho.setBounds(mainFrame.getWidth()-30, (mainFrame.getHeight()/2)-70,10,70);
+        mainFrame.addKeyListener(jugadorIzquierdoListener(mainFrame, jugadorIzquierdo));
+        mainFrame.addKeyListener(jugadorDerechoListener(mainFrame, jugadorDerecho));
+        jugadorIzquierdo.setBounds(20, (mainFrame.getHeight()/2)-palasInterface.palaHeight,palasInterface.palaWidth,palasInterface.palaHeight);
+        jugadorDerecho.setBounds(mainFrame.getWidth()-(30+palasInterface.palaWidth), (mainFrame.getHeight()/2)-palasInterface.palaHeight,palasInterface.palaWidth,palasInterface.palaHeight);
+        pelotaRebotante pelota = new pelotaRebotante();
+        mainFrame.add(pelota);
+        pelota.setLayout(null);
+        pelota.add(jugadorIzquierdo);
+        pelota.add(jugadorDerecho);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
+        mainFrame.setResizable(false);
+        mainFrame.requestFocusInWindow();
+        try{ 
+            UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"); //Usamos el LookAndFeel de Windows
+        } catch(Exception e){ //En caso de error mostramos un dialogo de error
+            e.printStackTrace();
+        }
     }
 }

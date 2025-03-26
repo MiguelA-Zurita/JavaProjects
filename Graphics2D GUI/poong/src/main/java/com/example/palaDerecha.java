@@ -4,9 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 
 public class palaDerecha extends JPanel implements palasInterface {
-    
+    private boolean Subiendo = false;
+    private boolean Bajando = false;
+
     public palaDerecha(){
-        super();
         setFocusable(true);
     }
 
@@ -22,18 +23,33 @@ public class palaDerecha extends JPanel implements palasInterface {
 
     @Override
     public void subir(JFrame framePadre){
-        if(this.getY()>=5){
-            this.setLocation(this.getX(), this.getY()-5);
+        if(this.getY()>0){
+            this.setLocation(this.getX(), this.getY()-palaSpeed);
             this.repaint();
         }
     }
 
     @Override
     public void bajar(JFrame framePadre){
-        if(this.getY()<= framePadre.getSize().height-this.getHeight()){
-            this.setLocation(this.getX(), this.getY()+5);
+        if(this.getY() < framePadre.getHeight()-palaHeight-framePadre.getInsets().top-6){
+            this.setLocation(this.getX(), this.getY()+palaSpeed);
             this.repaint(); 
         }
     }
 
+    public void setSubiendo(boolean Subiendo) {
+        this.Subiendo = Subiendo;
+    }
+
+    public void setBajando(boolean Bajando) {
+        this.Bajando = Bajando;
+    }
+
+    public boolean getSubiendo() {
+        return Subiendo;
+    }
+
+    public boolean getBajando() {
+        return Bajando;
+    }
 }

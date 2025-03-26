@@ -4,8 +4,10 @@ import java.awt.*;
 import javax.swing.*;
 
 public class palaIzquierda extends JPanel implements palasInterface{
+    private boolean subiendo = false;
+    private boolean bajando = false;
+
     public palaIzquierda(){
-        super();
         setFocusable(true);
     }
 
@@ -21,24 +23,33 @@ public class palaIzquierda extends JPanel implements palasInterface{
 
     @Override
     public void subir(JFrame framePadre){
-
-        if(this.getY()>=5){
-            this.setLocation(this.getX(),this.getY()-5); 
+        if(this.getY()>0){
+            this.setLocation(this.getX(), this.getY()-palaSpeed);
             this.repaint();
         }
-        System.out.println("Y de la pala:" + this.getY());
-        System.out.println("Height del frame: " + framePadre.getHeight());
     }
 
     @Override
     public void bajar(JFrame framePadre){
-        if(this.getY() < framePadre.getHeight()-palaHeight-framePadre.getInsets().top){
-            this.setLocation(this.getX(),this.getY()+5); 
+        if(this.getY() < framePadre.getHeight()-palaHeight-framePadre.getInsets().top-6){
+            this.setLocation(this.getX(), this.getY()+palaSpeed);
             this.repaint();
         }
-        System.out.println("Y de la pala:" + this.getY());
-        System.out.println("Height del frame: " + framePadre.getHeight());
-        System.out.println("Height bounds del frame: " + framePadre.getBounds().height);
-        System.out.println("Height Size del frame: " + framePadre.getSize().height);
+    }
+
+    public void setSubiendo(boolean subiendo) {
+        this.subiendo = subiendo;
+    }
+
+    public void setBajando(boolean bajando) {
+        this.bajando = bajando;
+    }
+
+    public boolean getSubiendo() {
+        return subiendo;
+    }
+
+    public boolean getBajando() {
+        return bajando;
     }
 }
