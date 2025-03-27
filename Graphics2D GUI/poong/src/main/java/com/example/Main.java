@@ -94,26 +94,32 @@ public class Main {
         };
         return listener;
     }
+
+    static class poong{
+        public poong(){
+            JFrame mainFrame = new JFrame("POOng!");
+            mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+            mainFrame.setSize(600, 400);
+            palaIzquierda jugadorIzquierdo = new palaIzquierda();
+            palaDerecha jugadorDerecho = new palaDerecha(); 
+            mainFrame.addKeyListener(jugadorIzquierdoListener(mainFrame, jugadorIzquierdo));
+            mainFrame.addKeyListener(jugadorDerechoListener(mainFrame, jugadorDerecho));
+            jugadorIzquierdo.setBounds(20, (mainFrame.getHeight()/2)-palasInterface.palaHeight,palasInterface.palaWidth,palasInterface.palaHeight);
+            jugadorDerecho.setBounds(mainFrame.getWidth()-(30+palasInterface.palaWidth), (mainFrame.getHeight()/2)-palasInterface.palaHeight,palasInterface.palaWidth,palasInterface.palaHeight);
+            pelotaRebotante pelota = new pelotaRebotante(jugadorIzquierdo, jugadorDerecho);
+            mainFrame.add(pelota);
+            pelota.setLayout(null);
+            pelota.add(jugadorIzquierdo);
+            pelota.add(jugadorDerecho);
+            mainFrame.setLocationRelativeTo(null);
+            mainFrame.setVisible(true);
+            mainFrame.setResizable(false);
+            mainFrame.requestFocusInWindow();
+        }
+    }
     
     public static void main(String[] args) {
-        JFrame mainFrame = new JFrame("POOng!");
-        mainFrame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        mainFrame.setSize(600, 400);
-        palaIzquierda jugadorIzquierdo = new palaIzquierda();
-        palaDerecha jugadorDerecho = new palaDerecha(); 
-        mainFrame.addKeyListener(jugadorIzquierdoListener(mainFrame, jugadorIzquierdo));
-        mainFrame.addKeyListener(jugadorDerechoListener(mainFrame, jugadorDerecho));
-        jugadorIzquierdo.setBounds(20, (mainFrame.getHeight()/2)-palasInterface.palaHeight,palasInterface.palaWidth,palasInterface.palaHeight);
-        jugadorDerecho.setBounds(mainFrame.getWidth()-(30+palasInterface.palaWidth), (mainFrame.getHeight()/2)-palasInterface.palaHeight,palasInterface.palaWidth,palasInterface.palaHeight);
-        pelotaRebotante pelota = new pelotaRebotante();
-        mainFrame.add(pelota);
-        pelota.setLayout(null);
-        pelota.add(jugadorIzquierdo);
-        pelota.add(jugadorDerecho);
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setVisible(true);
-        mainFrame.setResizable(false);
-        mainFrame.requestFocusInWindow();
+        poong poong = new poong();
         try{ 
             UIManager.setLookAndFeel("javax.swing.plaf.metal.MetalLookAndFeel"); //Usamos el LookAndFeel de Windows
         } catch(Exception e){ //En caso de error mostramos un dialogo de error
@@ -121,3 +127,4 @@ public class Main {
         }
     }
 }
+
