@@ -36,7 +36,7 @@ public class Main {
         dialog.setVisible(true);
     }
 
-    public static ActionListener reservarListener(JTextField nombre, JTextField dni, JTextField data, JComboBox hotel, //Metodo para recoger todos los valores e introducirlos en un label
+    public static ActionListener reservarListener(JTextField nombre, JTextField dni, JTextField data, JComboBox<String> hotel, //Metodo para recoger todos los valores e introducirlos en un label
             JSlider nits, JLabel reserva) {
         ActionListener escuchador = new ActionListener() {
             @Override
@@ -48,7 +48,7 @@ public class Main {
         return escuchador;
     }
 
-    public static ActionListener opcionHotelListener(JComboBox hoteles, JSlider nits) { //Metodo para devolver un listener el cual nos dará un maximo de noches dependiendo del hotel
+    public static ActionListener opcionHotelListener(JComboBox<String> hoteles, JSlider nits) { //Metodo para devolver un listener el cual nos dará un maximo de noches dependiendo del hotel
         ActionListener escuchador = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { //Sobreescribimos el metodo de la clase abstracta
@@ -168,7 +168,7 @@ public class Main {
         //Componentes para el hotel
         JLabel hotelLabel = new JLabel("Hotel: ");
         String opcionsHotelString[] = { "Hotel mar", "Hotel Illa", "Hotel Muntanya" };
-        JComboBox opcionsHotelComboBox = new JComboBox<String>(opcionsHotelString);
+        JComboBox<String> opcionsHotelComboBox = new JComboBox<>(opcionsHotelString);
         //Creamos el slider  
         JSlider duradaNitsSlider = new JSlider(0, 1, 7, 1);
         duradaNitsSlider.setMajorTickSpacing(1); //Cada tick será de 1, que representaran las noches
