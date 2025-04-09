@@ -1,7 +1,7 @@
 /*
  * Nombre:Miguel Angel Zurita Redwood
  * Fecha: 20/02/2025
- * DNI:43461316X
+ * 
  */
 
 package com.example;
