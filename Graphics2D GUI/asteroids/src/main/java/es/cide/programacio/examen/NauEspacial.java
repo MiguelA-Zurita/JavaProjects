@@ -41,6 +41,8 @@ class NauEspacial {
     }
 
     public void dibuixar(Graphics g) {
+        g.setColor(Color.RED);
+        g.drawRect(x, y, ample, alt);
         g.drawImage(imatge, x, y, ample, alt, padre); //Metodo que dibuja la nave
     }
 

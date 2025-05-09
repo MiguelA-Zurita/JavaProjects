@@ -33,6 +33,8 @@ class Asteroide {
     }
 
     public void dibuixar(Graphics g) {
+        g.setColor(Color.RED);
+        g.drawRect(x, y, radi*2, radi*2);
         g.drawImage(imatge, x, y, radi*2, radi*2, padre); //Dibuja el asteroide
     }
 

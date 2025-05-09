@@ -62,7 +62,7 @@ public class Main {
         JLabel generoLabel = new JLabel("Género:");
         generoLabel.setSize(150, 50);
         
-        JComboBox generoComboBox = new JComboBox<String>();
+        JComboBox<String> generoComboBox = new JComboBox<String>();
         generoComboBox.setSize(200, 50);
         generoComboBox.addItem("Acción");
         generoComboBox.addItem("Comèdia");

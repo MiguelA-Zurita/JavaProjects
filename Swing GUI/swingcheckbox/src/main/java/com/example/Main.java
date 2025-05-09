@@ -18,10 +18,10 @@ public class Main {
             closeButton.addActionListener(event -> dialogo.dispose());
             dialogo.add(closeButton,BorderLayout.SOUTH);
             System.out.println(e.getStateChange());
-            if(e.getStateChange() == 1){
+            if(e.getStateChange() == 2){
                 dialogo.add(new JLabel("El checkbox está desactivado!"));
                 
-            } else if(e.getStateChange() == 2){
+            } else if(e.getStateChange() == 1){
                 dialogo.add(new JLabel("El checkbox está activado!"));
             }
             //Haciendo visible el dialogo
