@@ -1,8 +1,6 @@
 package com.example;
 
 import java.io.*;
-import java.nio.*;
-import java.nio.file.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
@@ -16,7 +14,7 @@ public class Main {
         JPanel buscador = new JPanel();
         buscador.setLayout(new FlowLayout());
         buscador.add(new JLabel("Nombre del fichero:"));
-        JTextField path = new JTextField(35);
+        JTextField path = new JTextField(30);
         buscador.add(path);
         
         JTextArea contenido = new JTextArea();
@@ -34,8 +32,6 @@ public class Main {
         opciones.add(escribir);
         opciones.add(afegir);
         
-
-
         mainFrame.add(buscador, BorderLayout.NORTH);
         mainFrame.add(opciones, BorderLayout.SOUTH);
         mainFrame.add(contenido, BorderLayout.CENTER);
@@ -63,47 +59,41 @@ class listenerUtils{
                     inStr.close();
                     JOptionPane.showMessageDialog(display, "Se ha leído correctamente!", "Mensaje", 1);
                 } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "El archivo no se ha encontrado!", "FILE_NOT_FOUND", 0);
+                    JOptionPane.showMessageDialog(display, "El archivo no se ha encontrado!", "FILE_NOT_FOUND", 0);
                 }
             }
         };
         return listener;
-
-
     }
-    //TODO: Acabar esto
+
     static ActionListener escribirListener (JTextField inputUser, JTextArea display, JCheckBox afegir){
         ActionListener listener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String path = inputUser.getText().trim();
-                byte[] arraySerializado = new byte[display.getText().length()];
+                byte[] arraySerializado = new byte[display.getText().length()+(afegir.isSelected() ? System.lineSeparator().length() : 0)];
                 char[] arrayNoSerializado = display.getText().toCharArray();
-
                 try{
-                    for(int i = 0; i<display.getText().length(); i++){
-                        arraySerializado[i] = (byte) arrayNoSerializado[i];
+                    if(afegir.isSelected()){
+                        for(int i = 0; i<System.lineSeparator().length(); i++){
+                            arraySerializado[i] = (byte) System.lineSeparator().charAt(i);
+                        }
+                        System.out.println("Ha pasado la linea separativa");
+                    }
+                    for(int i = 0; i<arrayNoSerializado.length; i++){
+                        arraySerializado[i+(afegir.isSelected() ? System.lineSeparator().length() : 0)] = (byte) arrayNoSerializado[i];
                     }
                     FileOutputStream outStr = new FileOutputStream(path, afegir.isSelected());
-                    
                     outStr.write(arraySerializado);
                     outStr.close();
                     JOptionPane.showMessageDialog(display, "Se ha escrito correctamente!", "Mensaje", 1);
                 } catch(Exception ex){
                     ex.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "El archivo no se ha encontrado!", "FILE_NOT_FOUND", 0);
+                    JOptionPane.showMessageDialog(display, "El archivo no se ha encontrado!", "FILE_NOT_FOUND", 0);
                 }
                 
             }
         };
         return listener;
     }
-
-/*     static void write(final String s) throws IOException {
-        Files.writeString(
-            Path.of(System.getProperty("java.io.tmpdir"), "filename.txt"),
-            s + System.lineSeparator(),
-            StandardOpenOption.CREATE, StandardOpenOption.APPEND
-        );
-    } */
 }
