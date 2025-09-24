@@ -9,6 +9,9 @@ import java.io.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -39,52 +42,47 @@ public class Main {
         mainFrame.add(palindromoPanel, BorderLayout.CENTER);
         mainFrame.add(noPalindromoPanel, BorderLayout.SOUTH);
         mainFrame.setVisible(true);
-
     }
 }
 
 class listenerUtils {
     public static ActionListener leerListener(JTextField fichero, JTextArea palindromoArea, JTextArea noPalindromoArea){
-        ActionListener listener = new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                try {
-                    FileInputStream lector = new FileInputStream(fichero.getText()); // Clase para leer datos de un fichero
-                    char arrayNormal[] = new char[lector.available()]; // Array para guardar los caracteres en orden normal
-                    char arrayInverso[] = new char[lector.available()]; // Array para guardar los caracteres en orden invertido
-                    byte caracter = 0; // variable para guardar temporalmente caracteres
-                    int contador = 0; //variable para utilizar como indice en un while
-                    int largo = 0; //variable para utilizar como número de caracteres que hay en una linea
-                    String linea = ""; //String para añadir en el JtextArea correspondiente
-                    boolean esPalindromo = true;
-                    while(caracter != -1 && caracter != 10){ // Mientras no sea final de texto ni final de linea, empieza el bucle
-                        esPalindromo = true;
-                        do {
-                            caracter = (byte)lector.read(); //lee caracter 
-                            arrayNormal[contador] = (char)caracter; //añade el caracter al array Normal
-                            arrayInverso[arrayInverso.length-contador-1] = (char)caracter; //añade el caracter al array Inverso
-                            contador++; //Sube el contador
-                            largo++; //sube el largo de la linea
-                        } while (caracter != 10 && caracter != -1); //Sigue mientras no sea final de linea ni de documento
-                        contador = 0; // reset del contador
-                        for(int i = 0; i<largo; i++){ //Recorre los arrays de manera secuencial para comprobar si son palindromos
-                            if(arrayNormal[i] != arrayInverso[i]){ //en caso de que no sean iguales, hace que la variable esPalindromo sea falsa
-                                esPalindromo = false;
-                            }
-                            linea += arrayNormal[i]; //añade el caracter a la linea
+        return e -> {
+            try {
+                FileInputStream lector = new FileInputStream(fichero.getText()); // Clase para leer datos de un fichero
+                char[] arrayNormal = new char[lector.available()]; // Array para guardar los caracteres en orden nor
+                ArrayList<Character> list = new ArrayList<>();
+                int charAsInt = 0; // variable para guardar temporalmente caracteres
+                int largo = 0; //variable para utilizar como indice en un while
+                String linea = ""; //String para añadir en el JtextArea correspondiente
+                boolean esPalindromo = true;
+                charAsInt = lector.read(); //lee caracter
+                while(charAsInt != -1){ // Mientras no sea final de texto, empieza el bucle
+                    do {
+                        list.add((char)charAsInt); //añade el caracter al array Normal
+                        charAsInt = lector.read(); //lee caracter
+                    } while (charAsInt != 10 && charAsInt != 13 && charAsInt != -1); //Sigue mientras no sea final de linea ni de documento
+                    list.removeAll(Collections.singleton(' '));
+                    for(char caracter: list){ //Recorre los arrays de manera secuencial para comprobar si son palindromos
+                        if (caracter == ' ') {
+                            list.remove(caracter);
                         }
-                        if(esPalindromo){ //Si es palindromo, añade la linea a su correspondiente campo
-                            palindromoArea.append(linea);
-                        } else{ //si no, al otro campo
-                            noPalindromoArea.append(linea);
-                        }
-                        largo = 0; //resetea el largo de la linea
                     }
-                } catch (Exception ex) {
-                    JOptionPane.showMessageDialog(null, "Ha ocurrido un error!", "Error", 0); //Enseña un error en caso de no encontrar el archivo
+                    if(esPalindromo){ //Si es palindromo, añade la linea a su correspondiente campo
+                        palindromoArea.append(linea);
+                    } else{ //si no, al otro campo
+                        noPalindromoArea.append(linea);
+                    }
+
+                    linea = ""; //resetea la linea
+                    esPalindromo = true; //resetea la variable
+                    largo = 0; //resetea el indice
                 }
+                lector.close(); //cierra el lector
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(null, "Ha ocurrido un error! \n", "Error", 0); //Enseña un error en caso de no encontrar el archivo
+                ex.printStackTrace();
             }
         };
-        return listener;
     }
 }
